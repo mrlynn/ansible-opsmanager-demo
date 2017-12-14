@@ -1,0 +1,24 @@
+---
+- name: create ec2 instances
+  hosts: localhost
+  connection: local
+  gather_facts: false 
+  vars:
+    region: us-east-1
+    key: michael.lynn
+    tagsReplSet: '{"owner": "michael.lynn", "project": "Ops Manager Ansible", "expire-on": "2018-05-01", "Name": "mlynn-ansible-sharded-repset"}'
+    securityGroupsReplSet: '["mlynn-default"]'
+    ami: "ami-6869aa05"
+    replSetSize: 12
+  tasks:
+  - name: Replica Set instances
+    ec2:
+      key_name: "{{ key }}"
+      instance_type: t2.micro
+      image: "{{ ami }}"
+      wait: yes
+      group: "{{ securityGroupsReplSet }}"
+      count: "{{ replSetSize }}"
+      region: "{{ region }}"
+      instance_tags: "{{ tagsReplSet }}"
+    register: replicaset

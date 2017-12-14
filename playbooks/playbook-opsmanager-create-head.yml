@@ -1,0 +1,6 @@
+---
+- hosts: opsManager
+  remote_user: ec2-user
+  become: yes
+  tasks:
+  - file: path=/data/HEAD state=directory mode=0755 owner=mongodb-mms group=mongodb-mms

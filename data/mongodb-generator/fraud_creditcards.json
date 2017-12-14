@@ -1,0 +1,5 @@
+{
+  "_id": { "$number" : {"min" : 1, "max" : 100000 } },
+  "type": "Credit Line",
+  "availableCredit": { "$number" : {"min" : 1, "max" : 100000 } }
+}

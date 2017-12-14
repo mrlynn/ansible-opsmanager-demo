@@ -1,0 +1,11 @@
+---
+- hosts: ReplicaSet
+  remote_user: ec2-user
+  become: yes
+  tasks:
+  - name: stop agent
+    service: name=mongodb-mms-automation-agent state=stopped
+  - name: remove automation agent
+    yum: name=mongodb-mms-automation-agent state=removed
+  - name: remove config file
+    file: path=/etc/mongodb-mms/automation-agent.config state=absent

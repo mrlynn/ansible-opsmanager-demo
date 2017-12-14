@@ -1,0 +1,24 @@
+---
+- hosts: all
+  remote_user: ec2-user
+  tasks:
+    - shell: echo 123
+- hosts: localhost
+  remote_user: ec2-user
+  tasks:
+    - include: ssl-generation.yml item="{{outer_item}}"
+      with_items: "{{ groups['all'] }}"
+      loop_control: 
+        loop_var: outer_item
+- hosts: all
+  remote_user: ec2-user
+  become: yes
+  tasks:
+    - file:
+        state: absent
+        path: /etc/mongodb/ssl
+    - file: path=/etc/mongodb/ssl state=directory mode=0755 owner=root group=root
+    - template: src=files/mongodb-ca.pem dest=/etc/mongodb/ssl/mongodb-ca.pem
+    - template: src=/tmp/mongodb-{{inventory_hostname}}.pem dest=/etc/mongodb/ssl/mongodb-{{inventory_hostname}}.pem
+    - file: src=/etc/mongodb/ssl/mongodb-ca.pem dest=/etc/mongodb/ssl/ca.pem state=hard
+    - file: src=/etc/mongodb/ssl/mongodb-{{inventory_hostname}}.pem dest=/etc/mongodb/ssl/host.pem state=hard

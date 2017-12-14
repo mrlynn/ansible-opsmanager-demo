@@ -1,0 +1,18 @@
+---
+- hosts: ReplicaSet
+  remote_user: ec2-user
+  become: yes
+  tasks:
+  - template: src=../files/mongodb.repo dest=/etc/yum.repos.d/mongodb.repo owner=root group=root mode="u=rw,g=r,o=r"
+  - yum: name=* state=latest
+  #- yum: name=mongodb-org state=latest
+  - yum: name=mongodb-enterprise state=latest
+  - yum: name=mongodb-enterprise-shell state=latest
+  - yum: name=gpg state=latest
+  - file: path=/data state=directory mode=0755 owner=mongod group=mongod
+  - name: Install Cookie Cutter for Python 2.7
+    pip:
+      name={{ item.name }}
+    with_items:
+      - name: boto
+      - name: boto3

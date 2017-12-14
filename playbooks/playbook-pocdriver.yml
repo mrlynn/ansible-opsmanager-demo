@@ -1,0 +1,30 @@
+---
+- hosts: opsManager
+  remote_user: ec2-user
+  tasks:
+    - name: Install git
+      yum: name=git state=latest
+      become: yes
+    - name: Get maven epel repo
+      get_url: url=http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo dest=/etc/yum.repos.d/epel-apache-maven.repo
+      become: yes
+    - name: Use version 6
+      replace:
+        path: /etc/yum.repos.d/epel-apache-maven.repo
+        regexp: '\$releasever'
+        replace: 6
+      become: yes
+    - name: install maven
+      yum: name=apache-maven state=latest
+      become: yes      
+    - name: Download POC Driver
+      git: repo=https://github.com/johnlpage/POCDriver.git dest=/home/ec2-user/POCDriver
+    - name: Download Oracle Java
+      get_url: url=https://s3.eu-central-1.amazonaws.com/torstenspindler/jdk-8u121-linux-x64.rpm dest=/tmp/jdk-8u121-linux-x64.rpm
+    - name: Installing Oracle java
+      yum: name=/tmp/jdk-8u121-linux-x64.rpm state=present 
+      become: yes
+    - name: build
+      shell: mvn clean package
+      args:
+        chdir: /home/ec2-user/POCDriver

@@ -1,0 +1,18 @@
+---
+- hosts: ReplicaSet
+  remote_user: ec2-user
+  gather_facts: false
+  become: true
+  tasks:
+  - yum: name=munin-node state=present
+  - service: name=munin-node state=started enabled=yes
+  - file:
+     src: /usr/share/munin/plugins/iostat
+     dest: /etc/munin/plugins/iostat
+     state: link
+  - file:
+     src: /usr/share/munin/plugins/iostat_ios
+     dest: /etc/munin/plugins/iostat_ios
+     state: link
+
+

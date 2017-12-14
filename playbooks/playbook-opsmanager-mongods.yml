@@ -1,0 +1,9 @@
+---
+- hosts: opsManager
+  remote_user: ec2-user
+  become: yes
+  tasks:
+   - name: Launch Mongods for App
+     shell: sudo -u mongod mongod --port 27017 --dbpath /data/appdb --logpath /data/appdb/mongodb.log --fork
+   - name: Launch Mongods for Backup
+     shell: sudo -u mongod mongod --port 27018 --dbpath /data/backup --logpath /data/backup/mongodb.log --fork

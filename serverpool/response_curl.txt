@@ -1,0 +1,61 @@
+* Rebuilt URL to: GET/
+* Could not resolve host: GET
+* Closing connection 0
+curl: (6) Could not resolve host: GET
+*   Trying 34.207.244.35...
+* TCP_NODELAY set
+* Connected to ec2-34-207-244-35.compute-1.amazonaws.com (34.207.244.35) port 8080 (#1)
+* Server auth using Digest with user 'michael.lynn@mongodb.com'
+> GET /api/public/v1.0/serverPool/servers HTTP/1.1
+> Host: ec2-34-207-244-35.compute-1.amazonaws.com:8080
+> User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+> Accept: */*
+> Referer:
+>
+< HTTP/1.1 401 Unauthorized
+HTTP/1.1 401 Unauthorized
+< Date: Thu, 25 May 2017 09:15:34 GMT
+Date: Thu, 25 May 2017 09:15:34 GMT
+< WWW-Authenticate: Digest realm="MMS Public API", domain="", nonce="e9l9YtNBLdSfGY4b9PRuATCRQ5FCPcbh", algorithm=MD5, qop="auth", stale=false
+WWW-Authenticate: Digest realm="MMS Public API", domain="", nonce="e9l9YtNBLdSfGY4b9PRuATCRQ5FCPcbh", algorithm=MD5, qop="auth", stale=false
+< Content-Type: application/json;charset=ISO-8859-1
+Content-Type: application/json;charset=ISO-8859-1
+
+
+* Server auth using Digest with user 'michael.lynn@mongodb.com:e65fd292-8f40-4059-88e0-2f60e53abf09'
+< Content-Length: 106
+
+
+Content-Length: 106
+
+<
+* Ignoring the response-body
+* Curl_http_done: called premature == 0
+* Connection #1 to host ec2-34-207-244-35.compute-1.amazonaws.com left intact
+* Issue another request to this URL: 'http://ec2-34-207-244-35.compute-1.amazonaws.com:8080/api/public/v1.0/serverPool/servers'
+* Found bundle for host ec2-34-207-244-35.compute-1.amazonaws.com: 0x7ff265c02370 [can pipeline]
+* Re-using existing connection! (#1) with host ec2-34-207-244-35.compute-1.amazonaws.com
+* Connected to ec2-34-207-244-35.compute-1.amazonaws.com (34.207.244.35) port 8080 (#1)
+* Server auth using Digest with user 'michael.lynn@mongodb.com'
+> GET /api/public/v1.0/serverPool/servers HTTP/1.1
+> Host: ec2-34-207-244-35.compute-1.amazonaws.com:8080
+> Authorization: Digest username="michael.lynn@mongodb.com", realm="MMS Public API", nonce="e9l9YtNBLdSfGY4b9PRuATCRQ5FCPcbh", uri="/api/public/v1.0/serverPool/servers", cnonce="MzE0ZWIyOTZhOTBhNzg1ZGVkNzlhNGEyNjZjZmU1NTc=", nc=00000001, qop=auth, response="58db1a30996391084a84c7d2c171c4a9", algorithm="MD5"
+> User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)
+> Accept: */*
+> Referer: http://ec2-34-207-244-35.compute-1.amazonaws.com:8080/api/public/v1.0/serverPool/servers
+>
+< HTTP/1.1 200 OK
+HTTP/1.1 200 OK
+< Date: Thu, 25 May 2017 09:15:34 GMT
+Date: Thu, 25 May 2017 09:15:34 GMT
+< Vary: Accept-Encoding
+Vary: Accept-Encoding
+< Content-Length: 1176
+Content-Length: 1176
+< Content-Type: application/json
+Content-Type: application/json
+
+<
+* Curl_http_done: called premature == 0
+* Connection #1 to host ec2-34-207-244-35.compute-1.amazonaws.com left intact
+{"links":[{"href":"http://ec2-34-207-244-35.compute-1.amazonaws.com:8080/api/public/v1.0/serverPool/servers?pageNum=1&itemsPerPage=100","rel":"self"}],"results":[{"created":"2017-05-24T14:16:13Z","hostname":"ip-172-31-49-88.ec2.internal","id":"592595ad3e1df8283170af0e","links":[{"href":"http://ec2-34-207-244-35.compute-1.amazonaws.com:8080/api/public/v1.0/serverPool/servers/592595ad3e1df8283170af0e","rel":"self"}],"properties":{},"recycled":"1970-01-01T00:00:00Z","statusName":"AVAILABLE"},{"created":"2017-05-24T14:16:13Z","hostname":"ip-172-31-62-189.ec2.internal","id":"592595ad3e1df8283170af0f","links":[{"href":"http://ec2-34-207-244-35.compute-1.amazonaws.com:8080/api/public/v1.0/serverPool/servers/592595ad3e1df8283170af0f","rel":"self"}],"properties":{},"recycled":"1970-01-01T00:00:00Z","statusName":"AVAILABLE"},{"created":"2017-05-24T14:16:13Z","hostname":"ip-172-31-63-208.ec2.internal","id":"592595ad3e1df8283170af10","links":[{"href":"http://ec2-34-207-244-35.compute-1.amazonaws.com:8080/api/public/v1.0/serverPool/servers/592595ad3e1df8283170af10","rel":"self"}],"properties":{},"recycled":"1970-01-01T00:00:00Z","statusName":"AVAILABLE"}],"totalCount":3}

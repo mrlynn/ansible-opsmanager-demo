@@ -1,0 +1,19 @@
+- template: src=files/mongodb-ca.key dest=/tmp/mongodb-ca.key
+- template: src=files/mongodb-ca.crt dest=/tmp/mongodb-ca.crt
+- template: src=files/openssl-server.cnf dest=/tmp/openssl-server-{{hostvars[item]['inventory_hostname']}}.cnf
+- lineinfile: 
+    path: /tmp/openssl-server-{{hostvars[item]['inventory_hostname']}}.cnf
+    regexp: '^DNS.1 ='
+    line: 'DNS.1 = {{ hostvars[item]["inventory_hostname"] }}'
+- lineinfile:
+    path: /tmp/openssl-server-{{hostvars[item]['inventory_hostname']}}.cnf
+    regexp: '^DNS.2 ='
+    line: 'DNS.2 = {{ hostvars[item]["ansible_hostname"] }}'
+- lineinfile:
+    path: /tmp/openssl-server-{{hostvars[item]['inventory_hostname']}}.cnf
+    regexp: '^DNS.3 ='
+    line: 'DNS.3 = {{ hostvars[item]["ansible_fqdn"] }}'
+- shell: openssl genrsa -out /tmp/mongodb-{{hostvars[item]['inventory_hostname']}}.key 4096
+- shell: openssl req -new -key /tmp/mongodb-{{hostvars[item]['inventory_hostname']}}.key -out /tmp/mongodb-{{hostvars[item]['inventory_hostname']}}.csr -config /tmp/openssl-server-{{hostvars[item]['inventory_hostname']}}.cnf -subj "/C=DE/ST=RLP/L=Kaiserslautern/O=MongoDB/OU=CE/CN=Torsten Spindler"
+- shell: openssl x509 -req -days 365 -in /tmp/mongodb-{{hostvars[item]['inventory_hostname']}}.csr -CA /tmp/mongodb-ca.crt -CAkey /tmp/mongodb-ca.key -CAcreateserial -out /tmp/mongodb-{{hostvars[item]['inventory_hostname']}}.crt -extfile /tmp/openssl-server-{{hostvars[item]['inventory_hostname']}}.cnf -extensions v3_req
+- shell: cat /tmp/mongodb-{{hostvars[item]['inventory_hostname']}}.crt /tmp/mongodb-{{hostvars[item]['inventory_hostname']}}.key > /tmp/mongodb-{{hostvars[item]['inventory_hostname']}}.pem

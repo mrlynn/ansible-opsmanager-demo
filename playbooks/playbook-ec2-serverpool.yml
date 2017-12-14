@@ -1,0 +1,33 @@
+---
+- name: create ec2 instances
+  hosts: localhost
+  connection: local
+  gather_facts: false 
+  vars:
+    region: us-east-1
+    key: michael.lynn
+    tagsReplSet: '{"owner": "michael.lynn", "project": "Ops Manager Ansible", "expire-on": "2018-09-01", "Name": "mlynn-ansible-serverpool"}'
+    securityGroupsReplSet: '["mlynn-default"]'
+    ami: "ami-6869aa05"
+    replSetSize: 3
+  tasks:
+  - name: Server Pool Instances
+    ec2:
+      key_name: "{{ key }}"
+      instance_type: t2.micro
+      image: "{{ ami }}"
+      wait: yes
+      group: "{{ securityGroupsReplSet }}"
+      count: "{{ replSetSize }}"
+      region: "{{ region }}"
+      instance_tags: "{{ tagsReplSet }}"
+    register: serverpool
+  - name: Create and attach volume to serverpool instances
+    ec2_vol:
+      instance: "{{ item.id }}"
+      volume_size: 20  
+      volume_type: gp2
+      device_name: /dev/sdb
+      region: "{{ region }}"
+      delete_on_termination: yes
+    with_items: "{{ serverpool.instances }}"

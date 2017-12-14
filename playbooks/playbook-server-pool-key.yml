@@ -1,0 +1,30 @@
+---
+- hosts: opsManager
+  remote_user: ec2-user
+  tasks:
+  - name: get automation apikey
+    shell: mongo 127.0.0.1:27017 --quiet --eval "print(db.getSiblingDB('mmsdbconfig').config.customers.findOne().k)"
+    register: opsmanager_apikey
+  - debug: var=opsmanager_apikey
+  - name: get automation groupid
+    shell: mongo 127.0.0.1:27017 --quiet --eval "print(db.getSiblingDB('mmsdbconfig').config.customers.findOne()._id.str)" 
+    register: opsmanager_groupid
+  - debug: var=opsmanager_groupid
+- hosts: ServerPool
+  remote_user: ec2-user
+  become: yes
+  vars:
+    autoagent: mongodb-mms-automation-agent-manager-latest.x86_64.rpm
+  tasks:
+  - name: download automation agent
+    get_url: url="{{opsmanagerurl}}/download/agent/automation/{{autoagent}}" dest="/home/ec2-user/{{autoagent}}"
+  - name: install automation agent
+    yum: name=/home/ec2-user/{{autoagent}} state=present
+  - name: update config serverPoolKey
+    shell: echo "serverPoolKey={{serverpoolkey}}" >> /etc/mongodb-mms/automation-agent.config
+  - name: update config mmsBaseUrl
+    shell: perl -pi -e "s|mmsBaseUrl=|mmsBaseUrl={{opsmanagerurl}}|" /etc/mongodb-mms/automation-agent.config
+  - name: setup data directory
+    file: path=/data state=directory mode=0755 owner=mongod group=mongod
+  - name: start agent
+    service: name=mongodb-mms-automation-agent state=started

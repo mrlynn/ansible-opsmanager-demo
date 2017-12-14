@@ -1,0 +1,5 @@
+{
+  "_id": { "$number" : {"min" : 1, "max" : 100000 } },
+  "type": "Information",
+  "phoneNo": { "$number" : {"min" : 1111111111, "max" : 9999999999 } }
+}

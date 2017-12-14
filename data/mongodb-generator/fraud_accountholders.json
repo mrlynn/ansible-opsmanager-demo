@@ -1,0 +1,6 @@
+{
+  "_id": { "$number" : {"min" : 1, "max" : 100000 } },
+  "type": "Account Holder",
+  "firstName": {"$choose": ["Liam", "Noah", "Riley", "Leah"] },
+  "lastName":  {"$choose": ["Smith", "Mitchell", "James", "Anderson", "Phillips", "Lee", "Bell", "Parker", "Davis"] }
+}

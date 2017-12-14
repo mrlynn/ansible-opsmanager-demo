@@ -1,0 +1,7 @@
+---
+- hosts: opsManager
+  remote_user: ec2-user
+  become: true
+  tasks:
+   - shell: sudo -u mongod mongod --port 27017 --dbpath /data/appdb --logpath /data/appdb/mongodb.log --fork
+   - shell: sudo -u mongod mongod --port 27018 --dbpath /data/backup --logpath /data/backup/mongodb.log --fork

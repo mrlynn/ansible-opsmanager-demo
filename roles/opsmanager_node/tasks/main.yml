@@ -1,0 +1,37 @@
+---
+- name: create ec2 instances
+  hosts: localhost
+  connection: local
+  gather_facts: false 
+  vars:
+    region: us-east-1
+    key: michael.lynn
+    tagsOpsMgr: '{"owner": "michael.lynn", "project": "Ops Manager Ansible", "expire-on": "2017-12-01", "Name": "mlynn-ansible-opsmgr"}'
+    securityGroupsOpsMgr: '["mlynn-default"]'
+    ami: "ami-6869aa05"
+    replSetSize: 3
+  tasks:
+  - name: Ops Manager instance
+    ec2:
+      key_name: "{{ key }}"
+      instance_type: m3.xlarge
+      image: "{{ ami }}"
+      wait: yes
+      group: "{{ securityGroupsOpsMgr }}"
+      count: 1
+      region: "{{ region }}"
+      instance_tags: "{{ tagsOpsMgr }}"
+    register: opsmanager
+  - name: Create and attach volume to replica set instances
+    ec2_vol:
+      instance: "{{ item.id }}"
+      volume_size: 40
+      volume_type: gp2
+      device_name: /dev/xvdb
+      region: "{{ region }}"
+      delete_on_termination: yes
+    with_items: "{{ opsmanager.instances }}"
+  handlers:
+
+
+  

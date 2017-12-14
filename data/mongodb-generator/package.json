@@ -1,0 +1,32 @@
+{
+  "name": "mongodb-generator",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "assert": "^1.4.1",
+    "body-parser": "~1.17.1",
+    "bson": "^1.0.4",
+    "chance": "^1.0.12",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "event-stream": "^3.3.4",
+    "express": "~4.15.2",
+    "fakegoose": "0.0.2",
+    "faker": "^1.0.0",
+    "fs": "0.0.1-security",
+    "hbs": "~4.0.1",
+    "joi": "^4.6.2",
+    "mgeneratejs": "^0.4.0",
+    "mongodb-dataset-generator": "^1.0.0",
+    "mongodb-extended-json": "^1.1.2",
+    "mongodb-uri": "^0.9.7",
+    "mongoose": "^4.13.7",
+    "morgan": "~1.8.1",
+    "serve-favicon": "~2.4.2",
+    "underscore": "^1.8.2",
+    "yargs": "^3.4.4"
+  }
+}

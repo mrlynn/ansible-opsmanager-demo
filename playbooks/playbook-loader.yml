@@ -1,0 +1,26 @@
+---
+- hosts: opsManager
+  remote_user: ec2-user
+  tasks:
+   - name: Installing git
+     yum: name=git state=latest
+     become: yes
+   - name: Downloading Oracle java
+     #get_url: url=https://s3.eu-central-1.amazonaws.com/torstenspindler/jdk-8u91-linux-x64.rpm dest=/tmp/jdk-8u91-linux-x64.rpm
+     get_url: url=https://mirror.its.sfu.ca/mirror/CentOS-Third-Party/NSG/common/x86_64/jre-8u102-linux-x64.rpm dest=/tmp/jdk-8u91-linux-x64.rpm
+   - name: Installing Oracle java
+     yum: name=/tmp/jdk-8u91-linux-x64.rpm state=present 
+     become: yes
+   - name: Cloning simpleloader
+     git: repo=https://github.com/schambon/simpleloader.git dest=/home/ec2-user/simpleloader
+   - name: Configuring simpleloader
+     template: src=../files/secondaryload.yml dest=/home/ec2-user/simpleloader/secondaryload.yml
+   - name: Building simpleloader
+     command: ./gradlew compileKotlin getDeps
+     args:
+       chdir: /home/ec2-user/simpleloader
+   - name: Running simpleloader 1000 times
+     shell: sleep 60; ./run.sh secondaryload.yml
+     args:
+       chdir: /home/ec2-user/simpleloader
+     with_sequence: start=0 end=1000
