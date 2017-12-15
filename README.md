@@ -19,6 +19,30 @@ This directory contains details and instructions to help you get set up to run t
  - Modify the ansible.cfg file in the top level directory of this repo with the location of your key file.
   - private_key_file = /Users/mlynn/.ssh/michael.lynn.pem
 
+3. Python VirtualEnvWrapper
+	- We're going to be leveraging some python libraries.  This can be a maddening cycle of dependencies... unless you leverage a tool like virtualenvwrapper.  First - check this out: [Virtualenvwrapper.readthedocs.io](https://virtualenvwrapper.readthedocs.io/en/latest/)
+
+```
+$ pip install virtualenvwrapper
+
+...
+$ export WORKON_HOME=~/Envs
+$ mkdir -p $WORKON_HOME
+$ source /usr/local/bin/virtualenvwrapper.sh
+$ mkvirtualenv env1
+Installing
+setuptools..........................................
+....................................................
+....................................................
+...............................done.
+virtualenvwrapper.user_scripts Creating /Users/dhellmann/Envs/env1/bin/predeactivate
+virtualenvwrapper.user_scripts Creating /Users/dhellmann/Envs/env1/bin/postdeactivate
+virtualenvwrapper.user_scripts Creating /Users/dhellmann/Envs/env1/bin/preactivate
+virtualenvwrapper.user_scripts Creating /Users/dhellmann/Envs/env1/bin/postactivate  New python executable in env1/bin/python
+(env1)$ ls $WORKON_HOME
+env1 hook.log
+```
+
 3. BOTO
 
 This solution leverages the boto library for python for the creation of the ansible-hosts file from the AWS inventory.  To install boto - use the following command:
@@ -49,6 +73,19 @@ log_path=logs/ansible.log
 
 [ssh_connection]
 control_path = %(directory)s/%%C
+```
+
+7. Put your aws credentials in your .bash_profile
+
+```
+export AWS_ACCESS_KEY_ID='AYOURKEYHEREKIAJT2LODTX4PGGZNJQ'
+export AWS_SECRET_ACCESS_KEY='ryYceYOURSECRETKEYHEREBLbAh+7KjFoVZ'
+```
+
+Be certain to source your updated .bash_profile
+
+```
+source ~/.bash_profile
 ```
 
 ## Getting Setup
