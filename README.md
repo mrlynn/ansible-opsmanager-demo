@@ -1,14 +1,30 @@
 ## Synopsis
 
-This directory contains details and instructions to help you get set up to run the ansible-demo.
+This directory contains details and instructions to help you get set up to deploy a MongoDB Opsmanager instance along with a MongoDB replica set.
+
+## Overview
+This repository contains playbooks and scripts designed to automate the process of deploying, and configuring MongoDB Opsmanager for the purpose of demonstrating how you will improve the efficiency managing your MongoDB implementation using Opsmanager.
+
+Opsmanager was designed to help manage MongoDB across 4 key categories of activities:
+
+1. Monitoring
+2. Optimization
+3. Automation
+4. Backup
 
 ## Prerequisites
 
+In order to begin showing the power and flexibility of Opsmanager, we first need to set up our environment.  We're using [Ansible](http://ansible.com) to automate deployment and configuration of our instances.  We're also relying on [Amazon EC2](https://aws.amazon.com/ec2) for hosting of our instances.  While you may deploy local instances on your desktop/laptop, instances in docker, or in VMWare, we'll focus on EC2 for the purpose of this demonstration.
+
 1. Ansible
 
- - On Mac OS - simply type *brew install ansible*
+ - On Mac OS - simply type:
 
- - ![Brew Install ansible](/images/brew_install_ansible.png "Brew Install Ansible")
+ ```
+ brew install ansible
+ ```
+ 
+ For other OS's and additional information on Ansible, see the [Official Ansible Documentation Site](http://docs.ansible.com)
 
 2. AWS SSH Keys
 
@@ -43,11 +59,15 @@ virtualenvwrapper.user_scripts Creating /Users/dhellmann/Envs/env1/bin/postactiv
 env1 hook.log
 ```
 
-3. BOTO
+3. Boto
+
+Boto is a Python package that provides interfaces to Amazon Web Services. Currently, all features work with Python 2.6 and 2.7. Work is under way to support Python 3.3+ in the same codebase.
 
 This solution leverages the boto library for python for the creation of the ansible-hosts file from the AWS inventory.  To install boto - use the following command:
 
-```pip install boto3```
+```
+pip install boto3
+```
 
 4. Put your AWS Keys in place - ~/.aws/credentials:
 
@@ -128,23 +148,5 @@ So - You'll want to deploy one M3.xlarge for your Ops Manager machine and 3 t2.s
 
 The first thing we'll need to accomplish is getting our Ops Manager node deployed.  Since the application requirements are pretty decent, we'll leverage an M3 Instance.  Here's what that looks like in terms of resource:
 
+To deploy your own instances, I've simplified the process of executing the necessary scripts
 
-
-### Ansible Hosts File
-
-Once you have your hosts that you want to demonstrate connectivity and automation with **Ansible**, you need to create your ```ansible-hosts``` file.  Here's and example:
-
-```
-[opsManager]
-ec2-54-162-176-239.compute-1.amazonaws.com ansible_user=ec2-user
-
-[ReplicaSet]
-ec2-54-173-174-232.compute-1.amazonaws.com ansible_user=ec2-user
-ec2-54-173-133-164.compute-1.amazonaws.com ansible_user=ec2-user
-ec2-54-159-152-50.compute-1.amazonaws.com ansible_user=ec2-user
-
-[ReplicaSet:vars]
-opsmanagerurl=http://ec2-54-162-176-239.compute-1.amazonaws.com:8080
-opsmanager=ec2-54-162-176-239.compute-1.amazonaws.com
-```
-Notice that there's One OpsManager host and Three ReplicaSet hosts.  You'll need to put the FQDN's of your OpsManager and ReplicaSet members instead of mine. 
