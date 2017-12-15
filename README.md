@@ -112,6 +112,35 @@ source ~/.bash_profile
 
 Once you have the prereqs squared away, you're ready to begin either getting your nodes deployed for demo, or if you already have nodes deployed, you can skip this next section.
 
+### Opsmanager Package
+
+![opsmanager-download.png](opsmanager-download.png)
+
+In order for us to deploy Opsmanager, we need to download the opsmanager package from the MongoDB/Downloads site.  Visit [MongoDB/Downloads/Opsmanager](https://www.mongodb.com/download-center#ops-manager) and download the latest package version.  Place the downloaded package RPM in the [files](./files) directory.
+
+At the time this is being written, the package version is as follows:
+
+```mongodb-mms-3.6.0.582-1.x86_64.rpm```
+
+To deploy this package, I've hard-coded a reference to this version in the Ansible playbook that installs the package.  If you've downloaded a different version, you will need to update the reference in the playbook.  Here's a look at the playbook:
+
+```
+---
+- hosts: opsManager
+  remote_user: ec2-user
+  become: yes
+  vars:
+    opsmanagerGPG: mongodb-mms-3.4.7.479-1.x86_64.rpm.gpg
+    opsmanager: mongodb-mms-3.6.0.582-1.x86_64.rpm
+  tasks:
+    - copy: src=../files/{{ opsmanager }} dest=/home/ec2-user/{{opsmanager}}
+    - yum: name=/home/ec2-user/{{opsmanager}} state=present
+    - service: name=mongodb-mms state=started
+
+```
+
+Change line 7 to match the name of the version package you've downloaded.
+
 ### Node Deployment
 
 Ansible automates the process of package deployment, configuration as well as node deployment.  In this section, we're going to leverage Ansible's ability to connect directly to AWS/EC2 to deploy new instances for our demo.
@@ -148,5 +177,18 @@ So - You'll want to deploy one M3.xlarge for your Ops Manager machine and 3 t2.s
 
 The first thing we'll need to accomplish is getting our Ops Manager node deployed.  Since the application requirements are pretty decent, we'll leverage an M3 Instance.  Here's what that looks like in terms of resource:
 
-To deploy your own instances, I've simplified the process of executing the necessary scripts
+To deploy your own instances, I've simplified the process of executing the necessary scripts by numbering them logically.
+
+- Deploy Opsmanager ([`1_deploy_ec2_opsmgr.sh`](https://github.com/mrlynn/ansible-opsmanager-demo/blob/master/1_deploy_ec2_opsmgr.sh))
+
+	Here, we're deploying the EC2 instances that will host the Opsmanager software.  You can view the specific documentation to accomplish this independently [here](https://docs.opsmanager.mongodb.com/current/tutorial/install-simple-test-deployment/)
+
+- Deploy Replicaset Members ([`2_deploy_ec2_replset.sh`](https://github.com/mrlynn/ansible-opsmanager-demo/blob/master/2_deploy_ec2_replset.sh))
+
+
+- Create / Update Ansible Hosts File ([`3_create_ansible-hosts.sh`](https://github.com/mrlynn/ansible-opsmanager-demo/blob/master/3_create_ansible-hosts.sh))
+
+- Install Opsmanager ([`4_install_opsmanager.sh`](https://github.com/mrlynn/ansible-opsmanager-demo/blob/master/4_install_opsmanager.sh))
+
+- Onboard Replica Set Members into Opsmanager ([`5_onboard_replset.sh`](https://github.com/mrlynn/ansible-opsmanager-demo/blob/master/5_onboard_replset.sh))
 

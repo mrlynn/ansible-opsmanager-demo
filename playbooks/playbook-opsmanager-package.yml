@@ -4,16 +4,8 @@
   become: yes
   vars:
     opsmanagerGPG: mongodb-mms-3.4.7.479-1.x86_64.rpm.gpg
-    #opsmanager: mongodb-mms-3.4.7.479-1.x86_64.rpm
-    #opsmanager: mongodb-mms-3.5.4.510-1.x86_64.rpm
     opsmanager: mongodb-mms-3.6.0.582-1.x86_64.rpm
-    key: AKIAJT2LODTX4PGGZNJQ
-    secret: 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
   tasks:
     - copy: src=../files/{{ opsmanager }} dest=/home/ec2-user/{{opsmanager}}
-  #- get_url: url=https://s3.amazonaws.com/mlynn/{{opsmanager}} dest=/home/ec2-user/{{opsmanager}}
-  #- s3: bucket=mlynn object={{ opsmanager }} dest=/home/ec2-user/{{ opsmanager }} mode=get aws_access_key={{ key }} aws_secret_key={{ secret }}
-    #- s3: bucket=mlynn object=https://s3.amazonaws.com/mlynn/mongodb-mms-3.5.4.510-1.x86_64.rpm dest=/home/ec2-user/{{opsmanager}} mode=get
-#  - shell: echo 1234 | gpg --batch --passphrase-fd 0 {{opsmanagerGPG}}
     - yum: name=/home/ec2-user/{{opsmanager}} state=present
     - service: name=mongodb-mms state=started
