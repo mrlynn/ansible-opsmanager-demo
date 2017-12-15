@@ -114,7 +114,7 @@ Once you have the prereqs squared away, you're ready to begin either getting you
 
 ### Opsmanager Package
 
-![opsmanager-download.png](opsmanager-download.png)
+![opsmanager-download.png](https://github.com/mrlynn/ansible-opsmanager-demo/raw/master/opsmanager-download.png?s=200)
 
 In order for us to deploy Opsmanager, we need to download the opsmanager package from the MongoDB/Downloads site.  Visit [MongoDB/Downloads/Opsmanager](https://www.mongodb.com/download-center#ops-manager) and download the latest package version.  Place the downloaded package RPM in the [files](./files) directory.
 
