@@ -28,7 +28,7 @@ readConcernMajority: false
 secondary: false
 duration: 120
 #seed: ec2-34-229-157-95.compute-1.amazonaws.com, ec2-54-172-242-55.compute-1.amazonaws.com, ec2-34-203-10-202.compute-1.amazonaws.com
-ec2-184-72-180-171.compute-1.amazonaws.com, ec2-34-205-74-11.compute-1.amazonaws.com, ec2-52-90-113-129.compute-1.amazonaws.com
+seed: ec2-184-72-180-171.compute-1.amazonaws.com, ec2-34-205-74-11.compute-1.amazonaws.com, ec2-52-90-113-129.compute-1.amazonaws.com
  
 
 database: timeSeries
@@ -37,5 +37,9 @@ days: 15
 servers: 500
 drop: false
 createIndex: true # create basic indexes after drop?
+login: mlynn
+authSource: admin
+password: Password123!
+
 #description: "secondary load"
 description: "w:majority / j:true / rc enabled / 500 writers, 100 readers, loaded secondary"

@@ -1,15 +1,8 @@
 ---
 - hosts: ReplicaSet
-#- hosts: ReplicaSet
   remote_user: ec2-user
   become: yes
   tasks:
   - yum: name=xfsprogs state=present
   - shell: mkfs.xfs /dev/xvdb
   - mount: name=/data src=/dev/xvdb fstype=xfs opts=defaults,noatime state=mounted
-  - file:
-    path: /data/mongodb/mms/mongodb-releases/
-    state: directory
-    owner: mongodb-mms
-    group: mongodb-mms
-    mode: 0775

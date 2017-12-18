@@ -5,6 +5,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# ansible cfg
+ansible.cfg
+
 # opsmanager files
 files/mongodb*rpm
 

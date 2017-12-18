@@ -179,16 +179,20 @@ The first thing we'll need to accomplish is getting our Ops Manager node deploye
 
 To deploy your own instances, I've simplified the process of executing the necessary scripts by numbering them logically.
 
-- Deploy Opsmanager ([`1_deploy_ec2_opsmgr.sh`](https://github.com/mrlynn/ansible-opsmanager-demo/blob/master/1_deploy_ec2_opsmgr.sh))
+- *Deploy Opsmanager* ([`1_deploy_ec2_opsmgr.sh`](https://github.com/mrlynn/ansible-opsmanager-demo/blob/master/1_deploy_ec2_opsmgr.sh))
 
 	Here, we're deploying the EC2 instances that will host the Opsmanager software.  You can view the specific documentation to accomplish this independently [here](https://docs.opsmanager.mongodb.com/current/tutorial/install-simple-test-deployment/)
 
-- Deploy Replicaset Members ([`2_deploy_ec2_replset.sh`](https://github.com/mrlynn/ansible-opsmanager-demo/blob/master/2_deploy_ec2_replset.sh))
+	The instance deployed to run Opsmanager will be an m3.xlarge sized instance with an additional 40gb volume created and mounted on /data.  We'll store the backing Opsmanager databases in this volume.
+
+- *Deploy Replicaset Members* ([`2_deploy_ec2_replset.sh`](https://github.com/mrlynn/ansible-opsmanager-demo/blob/master/2_deploy_ec2_replset.sh))
 
 
-- Create / Update Ansible Hosts File ([`3_create_ansible-hosts.sh`](https://github.com/mrlynn/ansible-opsmanager-demo/blob/master/3_create_ansible-hosts.sh))
+- *Create / Update Ansible Hosts File* ([`3_create_ansible-hosts.sh`](https://github.com/mrlynn/ansible-opsmanager-demo/blob/master/3_create_ansible-hosts.sh))
 
-- Install Opsmanager ([`4_install_opsmanager.sh`](https://github.com/mrlynn/ansible-opsmanager-demo/blob/master/4_install_opsmanager.sh))
+- *Install Opsmanager* ([`4_install_opsmanager.sh`](https://github.com/mrlynn/ansible-opsmanager-demo/blob/master/4_install_opsmanager.sh))
 
-- Onboard Replica Set Members into Opsmanager ([`5_onboard_replset.sh`](https://github.com/mrlynn/ansible-opsmanager-demo/blob/master/5_onboard_replset.sh))
+- *Onboard Replica Set Members into Opsmanager* ([`5_onboard_replset.sh`](https://github.com/mrlynn/ansible-opsmanager-demo/blob/master/5_onboard_replset.sh))
+
+## Loading Data for your Demonstration ##
 
