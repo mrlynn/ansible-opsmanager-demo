@@ -18,6 +18,7 @@
     "faker": "^1.0.0",
     "fs": "0.0.1-security",
     "hbs": "~4.0.1",
+    "hoek": "^5.0.3",
     "joi": "^4.6.2",
     "mgeneratejs": "^0.4.0",
     "mongodb-dataset-generator": "^1.0.0",
