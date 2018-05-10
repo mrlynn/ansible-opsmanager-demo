@@ -20,7 +20,7 @@
     "hbs": "4.0.1",
     "hoek": "5.0.3",
     "joi": "4.9.0",
-    "mgeneratejs": "0.4.0",
+    "mgeneratejs": "0.5.0",
     "mongodb-dataset-generator": "1.0.0",
     "mongodb-extended-json": "1.10.0",
     "mongodb-uri": "0.9.7",
