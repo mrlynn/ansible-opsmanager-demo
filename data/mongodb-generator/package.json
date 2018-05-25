@@ -24,7 +24,7 @@
     "mongodb-dataset-generator": "1.0.0",
     "mongodb-extended-json": "1.10.0",
     "mongodb-uri": "0.9.7",
-    "mongoose": "4.13.7",
+    "mongoose": "4.13.14",
     "morgan": "1.8.2",
     "serve-favicon": "2.4.5",
     "underscore": "1.8.3",
