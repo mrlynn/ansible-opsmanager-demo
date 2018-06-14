@@ -15,7 +15,7 @@
     "event-stream": "3.3.4",
     "express": "4.15.5",
     "fakegoose": "0.0.2",
-    "faker": "1.1.0",
+    "faker": "4.1.0",
     "fs": "0.0.2",
     "hbs": "4.0.1",
     "hoek": "5.0.3",
