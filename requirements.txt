@@ -1,4 +1,4 @@
-ansible==2.4.1.0
+ansible==2.6.1
 asn1crypto==0.24.0
 bcrypt==3.1.4
 boto==2.49.0
