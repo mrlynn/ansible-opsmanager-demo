@@ -14,7 +14,7 @@
     "debug": "3.1.0",
     "event-stream": "3.3.4",
     "express": "4.15.5",
-    "fakegoose": "0.0.2",
+    "fakegoose": "0.0.3",
     "faker": "4.1.0",
     "fs": "0.0.2",
     "hbs": "4.0.1",
