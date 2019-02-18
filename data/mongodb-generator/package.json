@@ -22,7 +22,7 @@
     "joi": "13.7.0",
     "mgeneratejs": "0.5.0",
     "mongodb-dataset-generator": "1.0.0",
-    "mongodb-extended-json": "1.10.0",
+    "mongodb-extended-json": "1.10.1",
     "mongodb-uri": "0.9.7",
     "mongoose": "5.4.13",
     "morgan": "1.9.1",
