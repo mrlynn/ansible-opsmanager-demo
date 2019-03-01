@@ -3,7 +3,7 @@ asn1crypto==0.24.0
 bcrypt==3.1.6
 boto==2.49.0
 boto3==1.9.96
-botocore==1.12.96
+botocore==1.12.106
 cffi==1.11.5
 cryptography==2.5
 docutils==0.14
