@@ -10,7 +10,7 @@
     "body-parser": "1.18.3",
     "bson": "4.0.1",
     "chance": "1.0.16",
-    "cookie-parser": "1.4.3",
+    "cookie-parser": "1.4.4",
     "debug": "4.1.1",
     "event-stream": "4.0.1",
     "express": "4.16.4",
