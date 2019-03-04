@@ -19,7 +19,7 @@
     "fs": "0.0.2",
     "hbs": "4.0.3",
     "hoek": "6.1.2",
-    "joi": "13.7.0",
+    "joi": "14.3.1",
     "mgeneratejs": "0.5.0",
     "mongodb-dataset-generator": "1.0.0",
     "mongodb-extended-json": "1.10.0",
