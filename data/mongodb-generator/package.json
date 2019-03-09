@@ -8,7 +8,7 @@
   "dependencies": {
     "assert": "1.4.1",
     "body-parser": "1.18.3",
-    "bson": "4.0.1",
+    "bson": "4.0.2",
     "chance": "1.0.18",
     "cookie-parser": "1.4.4",
     "debug": "4.1.1",
