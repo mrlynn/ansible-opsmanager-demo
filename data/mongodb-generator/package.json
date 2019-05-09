@@ -6,7 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "assert": "1.4.1",
+    "assert": "1.5.0",
     "body-parser": "1.18.3",
     "bson": "4.0.2",
     "chance": "1.0.18",
