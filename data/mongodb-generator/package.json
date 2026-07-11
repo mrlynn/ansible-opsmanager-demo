@@ -25,7 +25,7 @@
     "mongodb-extended-json": "1.10.1",
     "mongodb-uri": "0.9.7",
     "mongoose": "5.5.2",
-    "morgan": "1.9.1",
+    "morgan": "1.11.0",
     "serve-favicon": "2.5.0",
     "underscore": "1.9.1",
     "yargs": "13.2.2"
