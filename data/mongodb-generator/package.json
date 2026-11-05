@@ -27,7 +27,7 @@
     "mongoose": "5.5.2",
     "morgan": "1.9.1",
     "serve-favicon": "2.5.0",
-    "underscore": "1.9.1",
+    "underscore": "1.13.8",
     "yargs": "13.2.2"
   }
 }
